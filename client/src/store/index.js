@@ -1,18 +1,16 @@
-import { createApp } from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 import Auth from './auth'
 
-const app = createApp({})
-app.use(Vuex)
-
-export default new Vuex.Store({
+const store = createStore({
   modules: {
     Auth
   },
-  state: {
-    cards: [
-      { id: 1 }
-    ]
+  state () {
+    return {
+      cards: [
+        { id: 1 }
+      ]
+    }
   },
   getters: {
 
@@ -25,3 +23,4 @@ export default new Vuex.Store({
   }
 })
 
+export default store
