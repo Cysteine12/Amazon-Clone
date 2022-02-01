@@ -73,7 +73,7 @@
 import Header from '@/components/Header.vue'
 import { PaperClipIcon } from '@heroicons/vue/solid'
 import { LockClosedIcon } from '@heroicons/vue/solid'
-import loginService from '@/services/loginService'
+import loginService from '@/services/auth/loginService'
 import { useRouter } from 'vue-router'
 
 export default {

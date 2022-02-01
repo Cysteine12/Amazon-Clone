@@ -47,31 +47,6 @@
           </button>
         </div>
       </form>
-      <div class="text-center">
-          -----------Or continue with-------------
-      </div>
-      <div class="grid grid-4 mx-5">
-          <a href="/api/auth/google" class="card">
-              <div class="my-2 mx-6">
-                <i class="fab fa-google fa-2x"></i>
-            </div>
-          </a>
-          <a href="#" class="card">
-              <div class="my-2 mx-6">
-                <i class="fab fa-facebook fa-2x"></i>
-              </div>
-          </a>
-          <a href="#" class="card">
-              <div class="my-2 mx-6">
-                <i class="fab fa-instagram fa-2x"></i>
-              </div>
-          </a>
-          <a href="#" class="card">
-              <div class="my-2 mx-6">
-                <i class="fab fa-linkedin fa-2x"></i>
-              </div>
-          </a>
-      </div>
     </div>
   </div>
 </template>

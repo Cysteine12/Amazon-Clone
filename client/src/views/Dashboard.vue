@@ -67,7 +67,7 @@
 
 <script>
 import Header from '@/components/Header.vue'
-import user from '@/services/userService.js'
+import user from '@/services/auth/userService.js'
 import { onMounted } from '@vue/runtime-core'
 
 export default {
