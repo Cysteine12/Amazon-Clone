@@ -30,116 +30,58 @@
 
         <div>
           <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-              <LockClosedIcon class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
-            </span>
             Sign in
           </button>
         </div>
       </form>
-      <div class="text-center">
-          -----------Or continue with-------------
-      </div>
-      <div class="grid grid-4 mx-5">
-        <form @click="googleLogin">
-          <a href="/api/auth/google" class="card">
-              <div class="my-2 mx-6">
-                <i class="fab fa-google fa-2x"></i>
-            </div>
-          </a>
-
-        </form>
-          <a href="#" class="card">
-              <div class="my-2 mx-6">
-                <i class="fab fa-facebook fa-2x"></i>
-              </div>
-          </a>
-          <a href="#" class="card">
-              <div class="my-2 mx-6">
-                <i class="fab fa-instagram fa-2x"></i>
-              </div>
-          </a>
-          <a href="#" class="card">
-              <div class="my-2 mx-6">
-                <i class="fab fa-linkedin fa-2x"></i>
-              </div>
-          </a>
-      </div>
     </div>
+  </div>
+  <div>
+    {{ authCheck.status }}
+    {{ authCheck.err }}
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
-import { PaperClipIcon } from '@heroicons/vue/solid'
-import { LockClosedIcon } from '@heroicons/vue/solid'
-import loginService from '@/services/auth/loginService'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import { ref } from '@vue/reactivity'
 
 export default {
   components: {
-    LockClosedIcon,
-    PaperClipIcon,
     Header
   },
   setup() {
-    const form = {
+    const form = ref({
       email: '',
       password: ''
-    }
+    })
+    const authCheck = ref({
+      status: '',
+      err: ''
+    })
 
     const router = useRouter()
+    const store = useStore()
 
     const formSubmit = async () => {
-      console.log(form);
-      const res = await loginService(form)
-      if (res === true) {
+      const res = await store.dispatch('login', form.value)
+
+      if (res.success === true) {
+        authCheck.value.status = res.msg
         router.push({ name: 'Dashboard'})
+      } else {
+        authCheck.value.status = await store.getters.authState
+        authCheck.value.err = res.err
       }
     }
 
-    const googleLogin = async () => {
-      await googleService()
-    }
-
-
     return {
       form,
-      formSubmit
+      formSubmit,
+      authCheck
     }
   }
 }
 </script>
-
-<style scoped>
-.card {
-    margin: 5px 3px;
-    border: 3px solid #fff;
-    padding: 3px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-}
-
-.card:hover {
-    border: 3px solid #2734a1;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-.grid-4 {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-</style>

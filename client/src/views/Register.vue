@@ -37,81 +37,78 @@
             </a>
           </div>
         </div>
-
         <div>
           <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-              <LockClosedIcon class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
-            </span>
             Sign in
           </button>
         </div>
       </form>
     </div>
   </div>
+  <div>
+    {{ authCheck.status }}
+    {{ authCheck.err }}
+  </div>
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
-import { PaperClipIcon } from '@heroicons/vue/solid'
-import { LockClosedIcon } from '@heroicons/vue/solid'
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import { ref } from '@vue/reactivity'
 
 export default {
   components: {
-    LockClosedIcon,
-    PaperClipIcon,
     Header
   },
   setup() {
-    const form = {
+    const form = ref({
       name: '',
       email: '',
       password: '',
       confirm_password: ''
+    })
+    const authCheck = ref({
+      status: '',
+      err: ''
+    })
+
+    const router = useRouter()
+    const store = useStore()
+
+    const formSubmit = async () => {
+      // Validate form data
+      const checkForm = ref(false)
+      if (form.value.password === form.value.confirm_password) {
+        if (form.value.password.length > 6) {
+          checkForm.value = true
+        } else {
+          authCheck.value.err = 'Password length must be above 6 characters'
+          checkForm.value = false
+        }
+      } else {
+        authCheck.value.err = 'Passwords do not match'
+        checkForm.value = false
+      }
+      // Register Account
+      if (checkForm.value) {
+        const res = await store.dispatch('register', form.value)
+  
+        if (res.success === true) {
+          authCheck.value.status = res.msg
+          router.push({ name: 'Login'})
+        } else {
+          authCheck.value.status = await store.getters.authState
+          authCheck.value.err = res.err
+        }
+      }
     }
 
-    const formSubmit = () => {
-      console.log(form);
-    }
-
-    
     return {
       form,
-      formSubmit
+      formSubmit,
+      authCheck
     }
   }
 }
 </script>
-
-<style scoped>
-.card {
-    margin: 5px 3px;
-    border: 3px solid #fff;
-    padding: 3px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-}
-
-.card:hover {
-    border: 3px solid #2734a1;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-.grid-4 {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-</style>

@@ -26,6 +26,7 @@ const register = async (req, res) => {
 
         res.status(200).json({ 
             success: true,
+            msg: 'Account Registration Successful!',
             data: data
         })
     } catch (err) {
@@ -64,13 +65,12 @@ const login = async (req, res) => {
                     res.status(200).json({ 
                         msg: 'Login Successful',
                         success: true,
-                        data: `Bearer ${token}`
+                        token: `Bearer ${token}`,
+                        user: user
                     })
                 })
             }
         }
-
-
     } catch (err) {
         res.status(404).json({ err })
     }
@@ -79,7 +79,7 @@ const login = async (req, res) => {
 const profile = async (req, res) => {
     res.status(200).json({
         success: true,
-        data: req.user
+        user: req.user
     })
 }
 

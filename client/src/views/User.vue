@@ -102,12 +102,10 @@
 </template>
 
 <script>
-import { PaperClipIcon } from '@heroicons/vue/solid'
 import Header from '@/components/Header.vue'
 
 export default {
   components: {
-    PaperClipIcon,
     Header
   },
 }

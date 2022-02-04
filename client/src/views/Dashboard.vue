@@ -67,15 +67,19 @@
 
 <script>
 import Header from '@/components/Header.vue'
-import user from '@/services/auth/userService.js'
 import { onMounted } from '@vue/runtime-core'
+import { ref } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
- name: 'Home',
+ name: 'Dashboard',
   components: {
     Header
   },
   setup() {
+    const store = useStore()
+    const user = ref(null)
+
     const people = [
       {
           name: 'Gbenga Peace',
@@ -87,7 +91,10 @@ export default {
           'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
       },
     ]
-    onMounted(user)
+    onMounted(async () => {
+      const res = await store.dispatch('getProfile')
+      user.value = res.user
+    })
     return {
       people,
     }
