@@ -9,7 +9,7 @@
       </li>
       <li v-if="isLoggedIn">
           <button @click.prevent="logoutForm">
-            {{ logout }}
+            {{ logout[0] }}
           </button>
       </li>
     </nav>

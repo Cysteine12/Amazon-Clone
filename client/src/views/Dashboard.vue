@@ -80,7 +80,7 @@ export default {
     const store = useStore()
     const user = ref(null)
 
-    const people = [
+    const people = ref([
       {
           name: 'Gbenga Peace',
           title: 'Cysteine',
@@ -90,14 +90,17 @@ export default {
           image:
           'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
       },
-    ]
+    ])
     onMounted(async () => {
-      const res = await store.dispatch('getProfile')
-      user.value = res.user
+      await store.dispatch('getProfile')
+
+      user.value = await store.getters.user
+      people.value.push(await store.getters.user)
     })
     console.log(user.value);
     return {
       people,
+      user
     }
   }
 }
