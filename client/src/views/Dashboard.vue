@@ -95,6 +95,7 @@ export default {
       const res = await store.dispatch('getProfile')
       user.value = res.user
     })
+    console.log(user.value);
     return {
       people,
     }
