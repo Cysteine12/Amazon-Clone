@@ -24,22 +24,22 @@
                 </th>
               </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              <tr v-for="person in people" :key="person.email">
+            <tbody v-if="user !== []" class="bg-white divide-y divide-gray-200">
+              <tr v-for="user in user" :key="user.email">
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10">
-                      <img class="h-10 w-10 rounded-full" :src="person.image" alt="" />
+                      <img class="h-10 w-10 rounded-full" :src="user.image" alt="" />
                     </div>
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900">
-                        {{ person.name }}
+                        {{ user.name }}
                       </div>
                     </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900">{{ person.email }}</div>
+                  <div class="text-sm text-gray-900">{{ user.email }}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
@@ -47,13 +47,16 @@
                   </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{ person.createdAt }}
+                  {{ user.createdAt }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                 </td>
               </tr>
             </tbody>
+            <div v-else>
+              {{ authCheck.status }}
+            </div>
           </table>
         </div>
       </div>
@@ -74,25 +77,24 @@ export default {
   },
   setup() {
     const store = useStore()
-    const user = ref(null)
+    const user = ref([])
+    const authCheck = ref({
+      status: '',
+      err: ''
+    })
 
-    const people = ref([
-      {
-          name: 'Gbenga Peace',
-          email: 'gbengabp12@example.com',
-          createdAt: '12/02/2022'
-      },
-    ])
+
     onMounted(async () => {
       await store.dispatch('getProfile')
 
-      user.value = await store.getters.user
-      people.value.push(await store.getters.user)
+      authCheck.value.status = await store.getters.authState
+      console.log(await store.getters.authState);
+      user.value.push(await store.getters.user)
     })
-    console.log(user.value);
+
     return {
-      people,
-      user
+      authCheck,
+      user,
     }
   }
 }

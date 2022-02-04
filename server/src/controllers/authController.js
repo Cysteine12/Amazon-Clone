@@ -16,19 +16,27 @@ const index = async (req, res) => {
 
 const register = async (req, res) => {
     try {
-        const user = new User({
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
-            address: req.body.address
-        })
-        const data = await user.save()
-
-        res.status(200).json({ 
-            success: true,
-            msg: 'Account Registration Successful!',
-            data: data
-        })
+        const check = await User.findOne({ email: req.body.email })
+        if (check) {
+            res.status(200).json({
+                msg: 'Email already exists!',
+                success: false
+            })
+        } else {
+            const user = new User({
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password,
+                address: req.body.address
+            })
+            const data = await user.save()
+    
+            res.status(200).json({ 
+                success: true,
+                msg: 'Account Registration Successful!',
+                data: data
+            })
+        }
     } catch (err) {
         res.status(404).json({ err })
     }
@@ -40,14 +48,14 @@ const login = async (req, res) => {
         const user = await User.findOne({ email })
         
         if (!user) {
-            res.status(400).json({
+            res.status(200).json({
                 msg: 'Email is not found',
                 success: false
             })
         } else {
             const isMatch = user.password === password
             if (!isMatch) {
-                res.status(404).json({
+                res.status(200).json({
                     msg: 'Incorrect password',
                     success: false
                 })

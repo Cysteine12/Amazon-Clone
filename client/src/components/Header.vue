@@ -65,10 +65,6 @@ export default {
           'link': '/about'
         },
         {
-          'name': 'Dashboard',
-          'link': '/dashboard'
-        },
-        {
           'name':'Login',
           'link': '/login'
         },

@@ -29,15 +29,16 @@ const actions = {
                 // Set axios defaults
                 axios.defaults.headers.common['Authorization'] = token
                 commit('auth_success', msg, token, user)
-
+                
                 return {
                     success: res.data.success,
                     msg: res.data.msg
                 }
             } else {
-                commit('auth_error', err)
+                console.log(res.data);
+                commit('auth_error', res.data.msg)
                 return {
-                    err: res.data.err
+                    err: res.data.msg
                 }
             }
         } catch (err) {
@@ -61,9 +62,9 @@ const actions = {
                     msg: res.data.msg
                 }
             } else {
-                commit('register_error', err)
+                commit('register_error', res.data.msg)
                 return {
-                    err: res.data.err
+                    err: res.data.msg
                 }
             }
         } catch (err) {
@@ -97,9 +98,9 @@ const mutations = {
         state.token = token,
         state.user = user
     },
-    auth_error(state, err) {
-        state.status = 'Authentication failed, Try again',
-        state.error = err
+    auth_error(state, msg) {
+        state.status = 'Authentication failed',
+        state.error = msg
     },
     register_request(state) {
         state.status = 'loading..'
@@ -107,9 +108,9 @@ const mutations = {
     register_success(state, msg) {
         state.status = msg
     },
-    register_error(state, err) {
+    register_error(state, msg) {
         state.status = 'Account registration failed, Try again',
-        state.error = err
+        state.error = msg
     },
     profile_request(state) {
         state.status = 'loading..'
