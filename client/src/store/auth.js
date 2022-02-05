@@ -35,7 +35,6 @@ const actions = {
                     msg: res.data.msg
                 }
             } else {
-                console.log(res.data);
                 commit('auth_error', res.data.msg)
                 return {
                     err: res.data.msg

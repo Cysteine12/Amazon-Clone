@@ -26,6 +26,7 @@ const store = async (req, res) => {
 
         res.status(200).json({ 
             success: true,
+            msg: 'Product posted successfully',
             data: data
         })
     } catch (err) {
