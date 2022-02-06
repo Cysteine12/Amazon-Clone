@@ -1,12 +1,12 @@
 import axios from 'axios'
 import router from '../router'
 
-const state = {
+const state = () => ({
     token: localStorage.getItem('token') || '',
     user: {},
     status: '',
     error: ''
-}
+})
 
 const getters = {
     isLoggedIn : state => !!state.token,

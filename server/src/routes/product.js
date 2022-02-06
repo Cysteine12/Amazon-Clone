@@ -13,7 +13,7 @@ const ProductController = require('../controllers/productController')
 
 router.get('/', ProductController.index)
 
-router.get('/category/:category', ProductController.findByCategory)
+router.get('/category/:categoryId', ProductController.findByCategory)
 
 router.post('/', upload.single('photo'), ProductController.store)
 

@@ -1,14 +1,15 @@
 import axios from 'axios'
 
-const state = {
+const state = () => ({
     products: [],
     status: '',
     error: ''
-}
+})
 
 const getters = {
     getProductState: state => state.status,
-    products: state => state.products
+    products: state => state.products,
+    error: state => state.error
 }
 
 const actions = {

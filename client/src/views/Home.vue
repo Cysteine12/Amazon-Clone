@@ -1,4 +1,5 @@
 <template>
+<div>
   <Header header="Welcome To The Homepage" />
   <main>
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
@@ -17,7 +18,12 @@
         :category="category" 
       />
     </div>
+    <div v-else>
+      {{ statCheck.status }}
+      {{ statCheck.err }}
+    </div>
   </main>
+</div>
 </template>
 
 <script>
@@ -45,6 +51,7 @@ export default {
       await store.dispatch('getCategories')
 
       statCheck.value.status = await store.getters.getCategoryState
+      statCheck.value.err = await store.getters.error
       categories.value = await store.getters.categories
     })
 
