@@ -46,7 +46,7 @@ export default {
 
       statCheck.value.status = await store.getters.getProductState
       statCheck.value.err = await store.getters.productError
-      products.value.push(await store.getters.products)
+      products.value = await store.getters.products
     })
 
     return {
