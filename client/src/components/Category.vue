@@ -45,7 +45,7 @@ export default {
       await store.dispatch('getProducts', props.category._id)
 
       statCheck.value.status = await store.getters.getProductState
-      statCheck.value.err = await store.getters.error
+      statCheck.value.err = await store.getters.productError
       products.value.push(await store.getters.products)
     })
 

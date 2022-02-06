@@ -51,7 +51,7 @@ export default {
       await store.dispatch('getCategories')
 
       statCheck.value.status = await store.getters.getCategoryState
-      statCheck.value.err = await store.getters.error
+      statCheck.value.err = await store.getters.categoryError
       categories.value = await store.getters.categories
     })
 

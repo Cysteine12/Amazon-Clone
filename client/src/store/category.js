@@ -9,7 +9,7 @@ const state = () => ({
 const getters = {
     getCategoryState: state => state.status,
     categories: state => state.categories,
-    error: state => state.error
+    categoryError: state => state.error
 }
 
 const actions = {
