@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+import './assets/utilities.css'
+import './assets/index.css'
 
 const app = createApp({})
 

@@ -88,7 +88,6 @@ export default {
       await store.dispatch('getProfile')
 
       authCheck.value.status = await store.getters.authState
-      console.log(await store.getters.authState);
       user.value.push(await store.getters.user)
     })
 
