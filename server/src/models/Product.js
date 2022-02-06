@@ -3,7 +3,8 @@ const { Schema, model } = require('mongoose')
 const productSchema = new Schema({
     category: {
         type: Schema.Types.ObjectId,
-        ref: 'Category'
+        ref: 'Category',
+        required: true
     },
     owner: {
         type: Schema.Types.ObjectId,

@@ -10,19 +10,47 @@
       </div>
       <!-- /End replace -->
     </div>
+    <div v-if="categories != ''">
+      <Category 
+        v-for="category in categories" 
+        :key="category._id" 
+        :category="category" 
+      />
+    </div>
   </main>
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
+import Category from '@/components/Category.vue'
+import { onMounted } from '@vue/runtime-core'
+import { ref } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
-  name: 'Home',
+ name: 'Home',
   components: {
-    Header
+    Header,
+    Category
   },
   setup() {
+    const store = useStore()
+    const categories = ref([])
+    const statCheck = ref({
+      status: '',
+      err: ''
+    })
+
+    onMounted(async () => {
+      await store.dispatch('getCategories')
+
+      statCheck.value.status = await store.getters.getCategoryState
+      categories.value = await store.getters.categories
+    })
+
     return {
+      statCheck,
+      categories,
     }
   }
 }

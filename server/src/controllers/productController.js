@@ -3,6 +3,20 @@ const Product = require('../models/Product')
 const index = async (req, res) => {
     try {
         const data = await Product.find().sort({ createdAt: -1 })
+        
+        res.status(200).json({ 
+            success: true,
+            data: data
+        })
+    } catch (err) {
+        res.status(200).json({ err })
+    }
+}
+
+const findByCategory = async (req, res) => {
+    try {
+        const { categoryId } = req.params
+        const data = await Product.find({ category: categoryId }).sort({ createdAt: -1 })
 
         res.status(200).json({ 
             success: true,
@@ -16,6 +30,7 @@ const index = async (req, res) => {
 const store = async (req, res) => {
     try {
         const product = new Product({
+            category: req.body.categoryId,
             title: req.body.title,
             description: req.body.description,
             photo: req.file.location,
@@ -37,7 +52,7 @@ const store = async (req, res) => {
 const show = async (req, res) => {
     try {
         const { id } = req.params
-        const data = await Product.findOne({ _id: id })
+        const data = await Product.findById(id)
 
         res.status(200).json({ 
             success: true,
@@ -52,6 +67,7 @@ const update = async (req, res) => {
     try {
         const { id } = req.params
         const product = {
+            category: req.body.categoryId,
             title: req.body.title,
             description: req.body.description,
             photo: req.body.photo,
@@ -83,6 +99,7 @@ const destroy = async (req, res) => {
 
 module.exports = {
     index,
+    findByCategory,
     store,
     show,
     update,

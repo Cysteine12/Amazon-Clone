@@ -1,86 +1,86 @@
 import axios from 'axios'
 
 const state = {
-    products: [],
+    categories: [],
     status: '',
     error: ''
 }
 
 const getters = {
-    getProductState: state => state.status,
-    products: state => state.products
+    getCategoryState: state => state.status,
+    categories: state => state.categories
 }
 
 const actions = {
-    async getProducts({ commit }, categoryId) {
-        commit('products_request')
+    async getCategories({ commit }) {
+        commit('categories_request')
         try {
-            const res = await axios.get(`http://localhost:5000/api/product/category/${categoryId}`)
+            const res = await axios.get(`http://localhost:5000/api/category`)
             if (res.data.success) {
 
-                commit('products_success', res.data.data)
+                commit('categories_success', res.data.data)
                 return {
                     success: res.data.success,
                     data: res.data.data
                 }
             } else {
-                commit('products_error', res.data.err)
+                commit('categories_error', res.data.err)
                 return {
                     err: res.data.err
                 }
             }
         } catch (err) {
-            commit('products_error', err)
+            commit('categories_error', err)
             return {
                 err: err
             }
         }
     },    
-    async postProduct({ commit }, formData) {
-        commit('post_product_request')
+    async postCategories({ commit }, formData) {
+        commit('post_category_request')
         try {
-            const res = await axios.post(`http://localhost:5000/api/product`, formData)
+            const res = await axios.post(`http://localhost:5000/api/category`, formData)
             if (res.data.success) {
                 
-                commit('post_product_success', res.data.msg)
+                commit('post_category_success', res.data.msg)
 
                 return {
                     success: res.data.success,
                     msg: res.data.msg,
-                    productId: res.data.data._id
+                    categoryId: res.data.data._id
                 }
             } else {
-                commit('post_product_error', res.data.err)
+                commit('post_category_error', res.data.err)
                 return {
                     err: res.data.err
                 }
             }
         } catch (err) {
-            commit('post_product_error', err)
+            commit('post_category_error', err)
             return {
                 err: err
             }
         }
     },
-    async getProduct({ commit }, productId) {
-        commit('product_request')
+    async getCategory({ commit }, categoryId) {
+        commit('category_request')
         try {
-            const res = await axios.get(`http://localhost:5000/api/product/${productId}`)
+            const res = await axios.get(`http://localhost:5000/api/category/${categoryId}`)
             if (res.data.success) {
                 
-                commit('product_success', res.data.data)
+                commit('category_success', res.data.data)
                 return {
                     success: res.data.success,
                     data: res.data.data
                 }
             } else {
-                commit('product_error', res.data.err)
+                commit('category_error', res.data.err)
                 return {
                     err: res.data.err
                 }
             }
         } catch (err) {
-            commit('product_error', err)
+            commit('category_error', err)
             return {
                 err: err
             }
@@ -89,35 +89,35 @@ const actions = {
 }
 
 const mutations = {
-    products_request(state) {
+    categories_request(state) {
         state.status = 'loading..'
     },
-    products_success(state, products) {
+    categories_success(state, categories) {
         state.status = '',
-        state.products = products
+        state.categories = categories
     },
-    products_error(state, err) {
+    categories_error(state, err) {
         state.status = 'Please reload the page!',
         state.error = err
     },
-    post_product_request(state) {
+    post_category_request(state) {
         state.status = 'loading..'
     },
-    post_product_success(state, msg) {
+    post_category_success(state, msg) {
         state.status = msg
     },
-    post_product_error(state, err) {
-        state.status = 'Product upload failed, Try again!',
+    post_category_error(state, err) {
+        state.status = 'Category upload failed, Try again!',
         state.error = err
     },
-    product_request(state) {
+    category_request(state) {
         state.status = 'loading..'
     },
-    product_success(state, product) {
+    category_success(state, category) {
         state.status = '',
-        state.products = product
+        state.categories = category
     },
-    product_error(state, err) {
+    category_error(state, err) {
         state.status = 'Please reload the page!',
         state.error = err
     }

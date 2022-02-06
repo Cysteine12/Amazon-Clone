@@ -22,6 +22,7 @@ const store = async (req, res) => {
 
         res.status(200).json({ 
             success: true,
+            msg: 'Category uploaded successfully',
             data: data
         })
     } catch (err) {
