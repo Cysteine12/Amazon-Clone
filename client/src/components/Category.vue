@@ -42,7 +42,6 @@ export default {
 
       statCheck.value.status = await store.getters.getProductState
       products.value.push(await store.getters.products)
-      console.log(products.value);
     })
 
     return {
