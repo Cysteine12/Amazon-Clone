@@ -2,20 +2,15 @@
 <div>
   <Header header="Home" />
   <main class="body-bg-color">
-    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-      <!-- Replace with your content -->
-      <div class="px-4 py-6 sm:px-0">
-        <div class="border-4 border-dashed border-gray-200 rounded-lg h-96">
+    <div>
           This is just an overview of the homepage
-        </div>
-      </div>
-      <!-- /End replace -->
     </div>
     <div v-if="categories != ''">
       <Category 
         v-for="category in categories" 
         :key="category._id" 
         :category="category" 
+        class="category-container"
       />
     </div>
     <div v-else>

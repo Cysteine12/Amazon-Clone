@@ -1,15 +1,17 @@
 <template>
     <div v-if="product != ''">
-        <ul>
-            <li>
-                <img :src="product.photo" :alt="product.title">
-            </li>
-            <li>Title: {{ product.title }}</li>
-            <li>Description: {{ product.description }}</li>
-            <li>Price: {{ product.price }}</li>
-            <li>Stock Quantity: {{ product.stockQuantity }}</li>
-            <li>Time: {{ product.createdAt }}</li>
-        </ul>
+        <div class="card-img">
+            <img :src="product.photo" :alt="product.title">
+        </div><br><br>
+        <div class="card-content">
+            <ul>
+                <li>Product: {{ product.title }}</li>
+                <li>Desc: {{ product.description }}</li>
+                <li>Price: {{ product.price }}</li>
+                <li>Stock Quantity: {{ product.stockQuantity }}</li>
+                <!-- <li>Time: {{ product.createdAt }}</li> -->
+            </ul>
+        </div>
     </div>
 </template>
 

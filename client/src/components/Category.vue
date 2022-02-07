@@ -1,11 +1,12 @@
 <template>
   <div v-if="category != ''">
-      <h1>Category Name: {{ category.type }}</h1>
-      <div v-if="products !== ''">
+      <h2>Category Name: {{ category.type }}</h2>
+      <div v-if="products !== ''" class="product-section">
         <Products 
           v-for="product in products" 
           :key="product._id" 
-          :product="product" 
+          :product="product"
+          class="product-card"
         />
       </div>
   </div>

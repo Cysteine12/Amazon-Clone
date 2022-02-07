@@ -47,10 +47,13 @@ img {
     width: 100%;
 }
 
+.body-bg-color {
+    background: #edf4fa;
+}
+
 
         /* Header */
 .header {
-    margin-bottom: 20px;
     padding: 10px 15px;
     background-color: var(--primary-color);
     color: #fff;
@@ -94,10 +97,15 @@ img {
 .navbar ul {
     margin: 0;
     display: flex;
+    box-shadow: -3px 0 10px #8c7386;
+}
+
+.navbar ul li {
+    margin: 10px 20px;
 }
 
 .navbar ul li a {
-    padding: 15px 20px;
+    padding: 10px 20px;
     color: var(--primary-color);
 }
 
@@ -150,14 +158,30 @@ img {
 
 /* Scroll-Section */
 
-.scroll-section {
+.category-container {
+    margin: 20px 10px;
+    padding-bottom: 20px;
+    border-radius: 7px;
+    background: #fff;
+    box-shadow: 5px 5px 10px #8c7386;
+}
+
+.category-container h2 {
+    padding: 5px 10px;
+    border-radius: 7px 7px 0 0;
+    background: var(--primary-color);
+    color: #fff;
+    font-weight: 200;
+}
+
+.product-section {
     display: flex;
     gap: 1em;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.scroll-card {
+.product-card {
     margin: 10px;
     display: inline-block;
 	box-shadow: 5px 5px 10px #8c7386;
@@ -166,20 +190,22 @@ img {
     position: relative;
 }
 
-.scroll-card .card-img {
+.product-card .card-img {
+    display: block;
     height: 160px;
     width: 200px;
 }
 
-.scroll-card .card-img img {
+.product-card .card-img img {
     border-radius: 2%;
 }
 
-.scroll-card .card-content ul {
+.product-card .card-content {
+    display: block;
     margin: 5px 10px;
 }
 
-.scroll-card .btn-scroll-card {
+.product-card .btn-scroll-card {
     margin: 5px 5px;
     padding: 0 5px;
     float: right;
