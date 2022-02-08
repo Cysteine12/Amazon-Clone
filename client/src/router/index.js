@@ -78,7 +78,7 @@ router.beforeEach((to, from, next) => {
     }
   } else if (to.matched.some(record => record.meta.ensureGuest)) {
     if (store.getters.isLoggedIn) {
-      next('/dashboard')
+      next('/')
     } else {
       next()
     }

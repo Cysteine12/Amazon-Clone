@@ -7,7 +7,7 @@
             <ul>
                 <li>Product: {{ product.title }}</li>
                 <li>Desc: {{ product.description }}</li>
-                <li>Price: {{ product.price }}</li>
+                <li>Price: ${{ product.price }}</li>
                 <li>Stock Quantity: {{ product.stockQuantity }}</li>
                 <!-- <li>Time: {{ product.createdAt }}</li> -->
             </ul>

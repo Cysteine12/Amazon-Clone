@@ -51,7 +51,7 @@ export default {
 
       if (res.success === true) {
         authCheck.value.status = res.msg
-        router.push({ name: 'Dashboard'})
+        router.push({ name: 'Home'})
       } else {
         authCheck.value.status = await store.getters.authState
         authCheck.value.err = res.err
