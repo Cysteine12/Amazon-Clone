@@ -1,7 +1,8 @@
 import { createStore } from 'vuex'
-import Auth from './auth'
-import Product from './product'
-import Category from './category'
+import Auth from './modules/auth'
+import Product from './modules/product'
+import Category from './modules/category'
+import Owner from './modules/owner'
 
 export default createStore({
   state() {
@@ -18,6 +19,7 @@ export default createStore({
   modules: {
     Auth,
     Product,
-    Category
+    Category,
+    Owner
   }
 })

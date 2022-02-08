@@ -68,6 +68,10 @@ export default {
             'link': '/about'
           },
           {
+            'name': 'Profile',
+            'link': '/profile'
+          },
+          {
             'name': 'Dashboard',
             'link': '/dashboard'
           }

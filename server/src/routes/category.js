@@ -1,6 +1,7 @@
 // -----------Back-end---------//
 const express = require('express')
 const router = express.Router()
+const { ensureAdmin } = require('../middlewares/auth')
 
 
 // -----------Controller---------//
@@ -8,16 +9,15 @@ const CategoryController = require('../controllers/categoryController')
 
 
 // -----------Router---------//
-
 router.get('/', CategoryController.index)
 
-router.post('/', CategoryController.store)
+router.post('/', ensureAdmin, CategoryController.store)
 
-router.get('/:id', CategoryController.show)
+router.get('/:id', ensureAdmin, CategoryController.show)
 
-router.put('/:id', CategoryController.update)
+router.put('/:id', ensureAdmin, CategoryController.update)
 
-router.delete('/:id', CategoryController.destroy)
+router.delete('/:id', ensureAdmin, CategoryController.destroy)
 
 
 module.exports = router

@@ -183,6 +183,9 @@
 
         /* Margin */
 
+.m-auto {
+    margin: auto;
+}
 
 .m-0 {
     margin: 0;
@@ -306,6 +309,24 @@
 .py-5 {
     padding-top: 4rem;
     padding-bottom: 4rem;
+}
+
+.mw-small {
+    margin: 5px auto;
+    display: block;
+    width: 400px;
+}
+
+.w-auto {
+    width: auto;
+}
+
+.d-inl-blck {
+    display: inline-block;
+}
+
+.fl-r {
+    float: right;
 }
 
 

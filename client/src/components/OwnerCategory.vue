@@ -1,6 +1,6 @@
 <template>
-  <div v-if="category != ''">
-      <h2>{{ category.type }}</h2>
+  <div v-if="ownerId != ''">
+      <h2>Your Products</h2>
       <div v-if="products !== ''" class="product-section">
         <Products 
           v-for="product in products" 
@@ -11,47 +11,48 @@
       </div>
   </div>
   <div v-else>
-      {{ statCheck.status }}
-      {{ statCheck.err }}
-    </div>
+    <StatCheck v-if="statusCheck" :statCheck="statusCheck" />
+  </div>
 </template>
 
 <script>
 import Products from '@/components/Products.vue'
+import StatCheck from '@/components/StatCheck.vue'
 import { onMounted } from '@vue/runtime-core'
 import { ref } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
- name: 'Category',
+ name: 'OwnerCategory',
   components: {
-    Products
+    Products,
+    StatCheck
   },
   props: {
-      category: {
-          type: Object,
+      ownerId: {
+          type: String,
           default: ''
       }
   },
   setup(props) {
     const store = useStore()
     const products = ref([])
-    const statCheck = ref({
+    const statusCheck = ref({
       status: '',
       err: ''
     })
 
 
     onMounted(async () => {
-      await store.dispatch('getProductsByCategory', props.category._id)
-
-      statCheck.value.status = await store.getters.getProductState
-      statCheck.value.err = await store.getters.productError
+      await store.dispatch('getProductsByOwner', props.ownerId)
+      
+      statusCheck.value.status = await store.getters.getProductState
+      statusCheck.value.err = await store.getters.productError
       products.value = await store.getters.products
     })
 
     return {
-      statCheck,
+      statusCheck,
       products
     }
   }

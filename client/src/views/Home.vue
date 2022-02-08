@@ -2,9 +2,7 @@
 <div>
   <Header header="Home" />
   <main class="body-bg-color">
-    <div>
-          This is just an overview of the homepage
-    </div>
+    <h1 class="p-1 px-2">Home</h1>
     <div v-if="categories != ''">
       <Category 
         v-for="category in categories" 

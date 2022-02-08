@@ -8,7 +8,8 @@ const productSchema = new Schema({
     },
     owner: {
         type: Schema.Types.ObjectId,
-        ref: 'Owner'
+        ref: 'Owner',
+        required: true
     },
     title: {
         type: String,

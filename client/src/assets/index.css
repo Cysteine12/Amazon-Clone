@@ -1,5 +1,5 @@
 @import 
-url('https://fonts.googleapis.com/css2?family=Roboto:wght@300..700&display=swap');
+url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 :root {
     --primary-color: #103141;
@@ -85,6 +85,7 @@ img {
 .navbar {
     background-color: #fff;
     overflow: auto;
+    box-shadow: 0 5px 5px#8c7386;
 }
 
 /* .navbar .logo {
@@ -97,15 +98,15 @@ img {
 .navbar ul {
     margin: 0;
     display: flex;
-    box-shadow: -3px 0 10px #8c7386;
+    box-shadow: 0 5px 5px#6d6c6d;
 }
 
 .navbar ul li {
-    margin: 10px 20px;
+    margin: 10px 10px;
 }
 
 .navbar ul li a {
-    padding: 10px 20px;
+    padding: 10px 10px;
     color: var(--primary-color);
 }
 
@@ -212,11 +213,107 @@ img {
 	box-shadow: 3px 3px 10px #8c7386;
 }
 
+.add-product-btn {
+    margin: 25px 10px;
+    border-radius: 5px;
+    max-width: 200px;
+}
+
 
 @media (min-width: 45em) {
     .card-img {
         float: right;
         width: 50%;
+    }
+}
+
+/* Form */
+
+.form-template-1 {
+    margin: auto;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    background-color: var(--primary-color);
+    color: #fff;
+    display: block;
+}
+
+.form-header {
+    border-bottom: 2px solid #fff;
+}
+
+.form-template-1 form {
+    padding: 10px 10px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 5px;
+    position: relative;
+}
+
+.form control label {
+    margin: 2px;
+    display: block;
+}
+
+.form-control input,
+.form-control .logo-input,
+.form-control select,
+.form-control textarea {
+    border: 1.5px solid #fff;
+    border-radius: 3px;
+    margin: 2px;
+    padding: 8px 5px;
+    width: 100%;
+    background: #161c2f;
+    color: #fff;
+    font-size: 16px;
+}
+
+.form-control .logo-input {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.form-control .logo-input .logo {
+    border-right: 1px solid #fff;
+    padding: 5px 8px;
+    display: inline-block;
+    font-weight: bold;
+    background: #080e20;
+}
+
+.form-control .logo-input input {
+    border: 0;
+    margin: 0;
+    display: inline-block;
+}
+
+.form-control input[type="checkbox"] {
+    position: absolute;
+    left: 0;
+    height: 20px;
+}
+
+.form-template-1 .btn {
+    margin: auto;
+    padding: 8px 30px;
+    display: block;
+    background-color: #fff;
+    color: #151c27;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+@media(max-width: 700px) {
+    .form-template-1 {
+        border-radius: 0;
+        margin-bottom: 0;
     }
 }
 

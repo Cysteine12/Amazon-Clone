@@ -13,7 +13,7 @@ const getters = {
 }
 
 const actions = {
-    async getProducts({ commit }, categoryId) {
+    async getProductsByCategory({ commit }, categoryId) {
         commit('products_request')
         try {
             const res = await axios.get(`http://localhost:5000/api/product/category/${categoryId}`)
@@ -36,7 +36,31 @@ const actions = {
                 err: err
             }
         }
-    },    
+    },
+    async getProductsByOwner({ commit }, ownerId) {
+        commit('products_request')
+        try {
+            const res = await axios.get(`http://localhost:5000/api/product/owner/${ownerId}`)
+            if (res.data.success) {
+
+                commit('products_success', res.data.data)
+                return {
+                    success: res.data.success,
+                    data: res.data.data
+                }
+            } else {
+                commit('products_error', res.data.err)
+                return {
+                    err: res.data.err
+                }
+            }
+        } catch (err) {
+            commit('products_error', err)
+            return {
+                err: err
+            }
+        }
+    },  
     async postProduct({ commit }, formData) {
         commit('post_product_request')
         try {

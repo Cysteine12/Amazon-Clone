@@ -15,6 +15,8 @@ router.get('/', ProductController.index)
 
 router.get('/category/:categoryId', ProductController.findByCategory)
 
+router.get('/owner/:ownerId', ProductController.findByOwner)
+
 router.post('/', upload.single('photo'), ProductController.store)
 
 router.get('/:id', ProductController.show)

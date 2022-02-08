@@ -27,10 +27,25 @@ const findByCategory = async (req, res) => {
     }
 }
 
+const findByOwner = async (req, res) => {
+    try {
+        const { ownerId } = req.params
+        const data = await Product.find({ owner: ownerId }).sort({ createdAt: -1 })
+
+        res.status(200).json({ 
+            success: true,
+            data: data
+        })
+    } catch (err) {
+        res.status(200).json({ err })
+    }
+}
+
 const store = async (req, res) => {
     try {
         const product = new Product({
             category: req.body.categoryId,
+            owner: req.body.ownerId,
             title: req.body.title,
             description: req.body.description,
             photo: req.file.location,
@@ -68,6 +83,7 @@ const update = async (req, res) => {
         const { id } = req.params
         const product = {
             category: req.body.categoryId,
+            owner: req.body.ownerId,
             title: req.body.title,
             description: req.body.description,
             photo: req.body.photo,
@@ -100,6 +116,7 @@ const destroy = async (req, res) => {
 module.exports = {
     index,
     findByCategory,
+    findByOwner,
     store,
     show,
     update,

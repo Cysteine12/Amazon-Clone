@@ -14,9 +14,25 @@ const routes = [
     component: () => import('../views/About.vue')
   },
   {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('../views/Profile.vue'),
+    meta: {
+      ensureAuth: true
+    }
+  },
+  {
     path: '/dashboard',
     name: 'Dashboard',
     component: () => import('../views/Dashboard.vue'),
+    meta: {
+      ensureAuth: true
+    }
+  },
+  {
+    path: '/dashboard/add-new-product',
+    name: 'ProductForm',
+    component: () => import('../views/ProductForm.vue'),
     meta: {
       ensureAuth: true
     }

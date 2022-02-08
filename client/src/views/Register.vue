@@ -1,65 +1,45 @@
 <template>
-<Header header=""/>
-<div class="min-h-full flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8">
-      <div>
-        <img class="mx-auto h-12 w-auto" src="" alt="Workflow" />
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Register for an account
-        </h2>
-      </div>
-      <form class="mt-8 space-y-6" @submit.prevent="formSubmit">
-        <div class="rounded-md shadow-sm -space-y-px">
-          <div class="my-5">
-            <label for="name" class="sr-only">Name</label>
-            <input id="name" v-model="form.name" type="text" autocomplete="name" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Name" />
-          </div>
-          <div class="my-5">
-            <label for="email-address" class="sr-only">Email address</label>
-            <input id="email-address" v-model="form.email" type="email" autocomplete="email" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address" />
-          </div>
-          <br/>
-          <div class="my-5">
-            <label for="password" class="sr-only">Password</label>
-            <input id="password" v-model="form.password" type="password" autocomplete="current-password" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password" />
-          </div>
-          <br>
-          <div class="my-5">
-            <label for="confirm-password" class="sr-only">Confirm Password</label>
-            <input id="confirm-password" v-model="form.confirm_password" type="password" autocomplete="current-password" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Confirm Password" />
-          </div>
-        </div>
-
-        <div class="flex items-center justify-between">
-          <div class="text-sm">
-            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-              <!-- Forgot your password? -->
-            </a>
-          </div>
-        </div>
-        <div>
-          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            Sign in
-          </button>
-        </div>
-      </form>
+<Header header="Register"/>
+<h1 class="p-1 px-2">Register</h1>
+<StatCheck v-if="authCheck" :statCheck="authCheck" />
+<div class="form-template-1">
+    <div class="form-header">
+        <h2 class="text-center p-2">Register for an account</h2>
     </div>
-  </div>
-  <div>
-    {{ authCheck.status }}
-    {{ authCheck.err }}
-  </div>
+    <form @submit.prevent="formSubmit">
+        <div class="form-control">
+            <label for="name">Name</label>
+            <input id="name" v-model="form.name" type="text" autocomplete="name" placeholder="Name" required/>
+        </div>
+        <div class="form-control">
+            <label for="email-address">Email address</label>
+            <input id="email-address" v-model="form.email" type="email" autocomplete="email" placeholder="Email address" required/>
+        </div>
+        <div class="form-control">
+            <label for="password">Password</label>
+            <input id="password" v-model="form.password" type="password" placeholder="Password" required/>
+        </div>
+        <div class="form-control">
+            <label for="confirm-password">Confirm password</label>
+            <input id="confirm-password" v-model="form.confirm_password" type="password" placeholder="Confirm password" required/>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-outline">Register</button>
+    </form>
+</div>
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
+import StatCheck from '@/components/StatCheck.vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { ref } from '@vue/reactivity'
 
 export default {
   components: {
-    Header
+    Header,
+    StatCheck
   },
   setup() {
     const form = ref({
