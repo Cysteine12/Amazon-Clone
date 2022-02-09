@@ -1,67 +1,38 @@
 <template>
     <Header header="Profile" />
     <h1 class="p-1 px-2">Profile</h1>
-    <div class="dashboard flex flex-col">
-    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-              <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Name
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Email
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Member since
-                </th>
-                <th scope="col" class="relative px-6 py-3">
-                  <span class="sr-only">Edit</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody v-if="user !== []" class="bg-white divide-y divide-gray-200">
-              <tr v-for="user in user" :key="user.email">
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="flex items-center">
-                    <div class="flex-shrink-0 h-10 w-10">
-                      <img class="h-10 w-10 rounded-full" :src="user.image" alt="" />
-                    </div>
-                    <div class="ml-4">
-                      <div class="text-sm font-medium text-gray-900">
-                        {{ user.name }}
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900">{{ user.email }}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                    Active
-                  </span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{ user.createdAt }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                </td>
-              </tr>
-            </tbody>
-            <div v-else>
-              {{ authCheck.status }}
+    <div class="body-bg-color dashboard" id="profile">
+      <section v-if="user !== []" id="profile_sec1">
+        <div v-for="user in user" :key="user.email" id="sec1_div">
+            <img src="https://helixcoders.files.wordpress.com/2020/09/qi-bin-w4hbafegiac-unsplash.jpg" alt="Profile pics" name="p_pics"/>
+            <br>
+            <hr/>
+            <h3 style="text-align:center; padding-left:0;">PROFILE DETAILS</h3>
+            <hr/>
+            <div class="tr">
+                <div class="td">Name </div>
+                <div class="td">{{ user.name }}</div>
             </div>
-          </table>
-        </div>
+            <div class="tr">
+                <div class="td">Email Address: </div>
+                <div class="td">{{ user.email}}</div>
+            </div>
+            <div class="tr">
+                <div class="td">Status: </div>
+                <div class="td">Active</div>
+            </div>
+            <div class="tr">
+                <div class="td">Member since: </div>
+                <div class="td">{{ user.createdAt }}</div>
+            </div>
+            <button class="alert-success" style="padding:7px;border-radius:5px">Edit Profile</button>
+            <button class="alert-error" style="padding:7px;border-radius:5px;display:inline;float:right;">Delete Account</button>
+            <br/>	
+          </div>
+			</section>
+      <div v-else>
+        {{ authCheck.status }}
       </div>
-    </div>
   </div>
 </template>
 
@@ -101,13 +72,75 @@ export default {
 </script>
 
 <style scoped>
-table {
-  text-align: left;
-}
-
 .dashboard {
   margin: auto;
   max-width: 1000px;
 }
+
+#profile{
+  margin: 0;
+  width: auto;
+  padding: 25px 5px 30px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  
+#profile_sec1{
+  background: #fff;
+  max-width: 500px;
+  border-radius: 5px;
+  box-shadow: -.5px -.5px .5px #939393;
+  padding: 10px 10px 20px 10px;
+  display: flex;
+  align-items: center;
+}
+  
+  
+#profile_sec1 #sec1_div{
+  margin: 10px;
+  width: 100%;
+  padding: 20px 20px;
+  border: 5px outset #4f5ddb;
+  border-radius: 10px;
+  max-width: 500px;
+}
+  
+  
+#profile_sec1 #sec1_div img{
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 5px solid #4f5ddb;
+  display: flex;
+  margin: 0 auto;
+}
+  
+#profile_sec1 #sec1_div hr{
+  height: 10px;
+  background: #4f5ddb;
+}
+  
+.tr{
+  padding: 20px 0;
+  margin: 0;
+  display: inline-block;
+  width: 100%;
+}
+  
+.td{
+  padding: 40px 0 40px 0;
+  display: inline;
+  width: 100%;
+  text-align: center;
+}
+  
+.td:first-child{
+  width: 25%;
+  font-size: 16px;
+  font-weight: 700;
+  color: #c2239c;
+}
+
 
 </style>
