@@ -1,5 +1,6 @@
 import axios from 'axios'
 import router from '../../router'
+const API = process.env.VUE_APP_API_URL
 
 const state = () => ({
     token: localStorage.getItem('token') || '',
@@ -18,7 +19,7 @@ const actions = {
     async login({ commit }, formData) {
         commit('auth_request')
         try {
-            const res = await axios.post(`http://localhost:5000/api/auth/login`, formData)
+            const res = await axios.post(`${API}/api/auth/login`, formData)
             if (res.data.success) {
                 const token = res.data.token
                 const user = res.data.user
@@ -50,7 +51,7 @@ const actions = {
     async register({ commit }, formData) {
         commit('register_request')
         try {
-            const res = await axios.post(`http://localhost:5000/api/auth/register`, formData)
+            const res = await axios.post(`${API}/api/auth/register`, formData)
             if (res.data.success) {
                 const msg = res.data.msg
                 
@@ -75,7 +76,7 @@ const actions = {
     },
     async getProfile({ commit }) {
         commit('profile_request')
-        const res = await axios.get(`http://localhost:5000/api/auth/profile`)
+        const res = await axios.get(`${API}/api/auth/profile`)
         commit('profile_success', res.data.user)
         return res.data
     },

@@ -1,4 +1,5 @@
 import axios from 'axios'
+const API = process.env.VUE_APP_API_URL
 
 const state = () => ({
     owners: [],
@@ -16,7 +17,7 @@ const actions = {
     async getOwners({ commit }) {
         commit('owners_request')
         try {
-            const res = await axios.get(`http://localhost:5000/api/owner`)
+            const res = await axios.get(`${API}/api/owner`)
             if (res.data.success) {
 
                 commit('owners_success', res.data.data)
@@ -40,7 +41,7 @@ const actions = {
     async postOwners({ commit }, formData) {
         commit('post_owner_request')
         try {
-            const res = await axios.post(`http://localhost:5000/api/owner`, formData)
+            const res = await axios.post(`${API}/api/owner`, formData)
             if (res.data.success) {
                 
                 commit('post_owner_success', res.data.msg)
@@ -66,7 +67,7 @@ const actions = {
     async getOwner({ commit }, ownerId) {
         commit('owner_request')
         try {
-            const res = await axios.get(`http://localhost:5000/api/owner/${ownerId}`)
+            const res = await axios.get(`${API}/api/owner/${ownerId}`)
             if (res.data.success) {
                 
                 commit('owner_success', res.data.data)

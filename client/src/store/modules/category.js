@@ -1,4 +1,5 @@
 import axios from 'axios'
+const API = process.env.VUE_APP_API_URL
 
 const state = () => ({
     categories: [],
@@ -16,7 +17,7 @@ const actions = {
     async getCategories({ commit }) {
         commit('categories_request')
         try {
-            const res = await axios.get(`http://localhost:5000/api/category`)
+            const res = await axios.get(`${API}/api/category`)
             if (res.data.success) {
 
                 commit('categories_success', res.data.data)
@@ -40,7 +41,7 @@ const actions = {
     async postCategories({ commit }, formData) {
         commit('post_category_request')
         try {
-            const res = await axios.post(`http://localhost:5000/api/category`, formData)
+            const res = await axios.post(`${API}/api/category`, formData)
             if (res.data.success) {
                 
                 commit('post_category_success', res.data.msg)
@@ -66,7 +67,7 @@ const actions = {
     async getCategory({ commit }, categoryId) {
         commit('category_request')
         try {
-            const res = await axios.get(`http://localhost:5000/api/category/${categoryId}`)
+            const res = await axios.get(`${API}/api/category/${categoryId}`)
             if (res.data.success) {
                 
                 commit('category_success', res.data.data)

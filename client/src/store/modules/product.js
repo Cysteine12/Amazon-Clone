@@ -1,4 +1,5 @@
 import axios from 'axios'
+const API = process.env.VUE_APP_API_URL
 
 const state = () => ({
     products: [],
@@ -16,7 +17,7 @@ const actions = {
     async getProductsByCategory({ commit }, categoryId) {
         commit('products_request')
         try {
-            const res = await axios.get(`http://localhost:5000/api/product/category/${categoryId}`)
+            const res = await axios.get(`${API}/api/product/category/${categoryId}`)
             if (res.data.success) {
 
                 commit('products_success', res.data.data)
@@ -40,7 +41,7 @@ const actions = {
     async getProductsByOwner({ commit }, ownerId) {
         commit('products_request')
         try {
-            const res = await axios.get(`http://localhost:5000/api/product/owner/${ownerId}`)
+            const res = await axios.get(`${API}/api/product/owner/${ownerId}`)
             if (res.data.success) {
 
                 commit('products_success', res.data.data)
@@ -64,7 +65,7 @@ const actions = {
     async postProduct({ commit }, formData) {
         commit('post_product_request')
         try {
-            const res = await axios.post(`http://localhost:5000/api/product`, formData)
+            const res = await axios.post(`${API}/api/product`, formData)
             if (res.data.success) {
                 
                 commit('post_product_success', res.data.msg)
@@ -90,7 +91,7 @@ const actions = {
     async getProduct({ commit }, productId) {
         commit('product_request')
         try {
-            const res = await axios.get(`http://localhost:5000/api/product/${productId}`)
+            const res = await axios.get(`${API}/api/product/${productId}`)
             if (res.data.success) {
                 
                 commit('product_success', res.data.data)
